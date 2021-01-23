@@ -1,0 +1,14 @@
+{
+  "name": "node_code_challenge",
+  "version": "1.0.0",
+  "description": "Code challenge assessment",
+  "main": "war.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "LaKeisha Turner",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
