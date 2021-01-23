@@ -1,5 +1,25 @@
 # War Server Code Challenge
 
+## Getting Started
+
+`npm install`
+
+`node war.js`
+
+### Start Game
+
+Using Postman make a request to:
+
+http://localhost:8000 - view all the possitble routes
+
+http://localhost:8000/game - starts a new game
+
+http://localhost:8000/game/:id - checks status of game
+
+http:localhost:8000/game/:id/play - shows the games winner, deck and cards
+
+## Description
+
 Your goal is to implement a server that plays the card game
 [War for 2 players](https://www.pagat.com/war/war.html#two). The server should
 have the following three endpoints:
