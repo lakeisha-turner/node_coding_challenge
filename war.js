@@ -49,11 +49,31 @@ const getGameId = () => {
     return game_id;
 }
 const gameStatus = (gameId) =>{
+    let playerOne = Math.floor(Math.random() * Math.floor(26));
+    let playerTwo = Math.floor(Math.random() * Math.floor(26));
+    
+   
+    
+    //add played winner cards to other player
+    if(playerOne > playerTwo){
+        playerOne = playerOne + (26 - playerTwo)
+    }else if(playerTwo > playerOne){
+        playerTwo = playerTwo + (26 - playerOne)
+    }
+
     game = {
         id: gameId,
-        playerOne:Math.floor(Math.random() * Math.floor(26)),
-        playerTwo:Math.floor(Math.random() * Math.floor(26))
+        playerOne:playerOne,
+        playerTwo:playerTwo
     }
+
+    //catch invalid game id
+    if(gameId != game_id){
+        game = {
+            error:"Invalid game id"
+        }
+    } 
+
     return game;
 }
 
@@ -64,12 +84,10 @@ const getCards = (numCards,excludeArray) =>{
     
     //remove excluded cards because they are in the other players deck
     if(excludeArray.length > 0){ 
-        console.log("Old Deck",cardsTypes.length);
         for( let i = 0; i < excludeArray.length; i++){ 
             index = cardsTypes.indexOf(excludeArray[i]);
             cardsTypes.splice(index, 1); 
         }  
-        console.log("New Deck",cardsTypes.length); 
     }
 
     // Get the cards in the current deck
@@ -123,5 +141,12 @@ const getWinner = (id) => {
             cards: playerTwoCards.cards
         }
     }
+
+    //catch invalid game id
+    if(id != game_id){
+        winner = {
+            error:"Invalid game id"
+        }
+    } 
     return winner
 }
