@@ -52,8 +52,6 @@ const gameStatus = (gameId) =>{
     let playerOne = Math.floor(Math.random() * Math.floor(26));
     let playerTwo = Math.floor(Math.random() * Math.floor(26));
     
-   
-    
     //add played winner cards to other player
     if(playerOne > playerTwo){
         playerOne = playerOne + (26 - playerTwo)
@@ -123,30 +121,37 @@ const determineWinner = (gameId,numCardsPlayer1,numCardsPlayer2) => {
 }
 
 const getWinner = (id) => {
-    numCards1 = game.playerOne;
-    numCards2 = game.playerTwo;
-
-    playerOneCards = getCards(numCards1,[]);
-    playerTwoCards = getCards(numCards2,playerOneCards.excludes);
-    
-    //the winner has the most cards
-    winner = {
-        winner: determineWinner(id,numCards1,numCards2), 
-        playerOne: {
-            deck: numCards1, 
-            cards: playerOneCards.cards
-        }, 
-        playerTwo: {
-            deck: numCards2, 
-            cards: playerTwoCards.cards
-        }
-    }
-
     //catch invalid game id
     if(id != game_id){
         winner = {
             error:"Invalid game id"
         }
-    } 
+    }else if(typeof game != 'object'){
+        winner = {
+            error:`You must start a game first initialize a game first, call /game/${id}`
+        }
+    } else{
+        numCards1 = game.playerOne;
+        numCards2 = game.playerTwo;
+
+        playerOneCards = getCards(numCards1,[]);
+        playerTwoCards = getCards(numCards2,playerOneCards.excludes);
+        
+        //the winner has the most cards
+        winner = {
+            winner: determineWinner(id,numCards1,numCards2), 
+            playerOne: {
+                deck: numCards1, 
+                cards: playerOneCards.cards
+            }, 
+            playerTwo: {
+                deck: numCards2, 
+                cards: playerTwoCards.cards
+            }
+        }
+    }
+    
+
+    
     return winner
 }
